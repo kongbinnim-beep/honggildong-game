@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0c1222">
+  <meta name="description" content="홍길동전에서 영감을 받은 모바일 선택형 스토리 게임. 지워진 사람들의 이름을 되찾아라.">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="홍길동전">
+  <meta name="format-detection" content="telephone=no">
+  <title>홍길동전: 지워진 이름들</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="game.js" defer></script>
+</head>
+<body>
+  <div class="grain" aria-hidden="true"></div>
+  <div class="app-shell">
+    <header class="site-header">
+      <a class="brand" href="#" id="homeLink" aria-label="게임 첫 화면으로">
+        <span class="brand-mark" aria-hidden="true">洪</span>
+        <span class="brand-type"><b>홍길동전</b><small>THE ERASED NAMES</small></span>
+      </a>
+      <div class="header-actions">
+        <button class="small-btn" id="journalButton" type="button" aria-haspopup="dialog" aria-label="단서첩 열기"><span aria-hidden="true">▤</span><span>단서첩</span><span class="count" id="clueCount">0</span></button>
+        <button class="music-btn" id="soundButton" type="button" aria-label="배경 음악 끄기" title="배경 음악"><span class="note">♫</span><span class="label">음악 끄기</span></button>
+      </div>
+    </header>
+
+    <main class="main-content">
+      <section class="topline" aria-label="진행 상태">
+        <div class="topline-copy"><span id="chapterEyebrow">서막 · 선택의 시작</span><span id="chapterNumber">00 / 07</span></div>
+        <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+      </section>
+
+      <section class="game-grid">
+        <aside class="left-rail" aria-hidden="true"><span>HONG · GIL · DONG</span><div></div><span>義</span></aside>
+        <article class="story-panel" id="storyPanel" aria-live="polite" aria-atomic="true">
+          <div id="gameView"></div>
+        </article>
+        <aside class="right-rail" aria-label="현재 상태">
+          <div class="stat-caption">당신이 바꾸고 있는 것</div>
+          <div class="stat-unit"><div class="stat-title"><span>◈</span> 증거 <strong id="evidenceValue">0</strong></div><div class="stat-meter"><div id="evidenceBar"></div></div><small>부패를 입증할 기록</small></div>
+          <div class="stat-unit"><div class="stat-title"><span>✦</span> 연대 <strong id="solidarityValue">0</strong></div><div class="stat-meter"><div id="solidarityBar"></div></div><small>서로를 지키려는 마음</small></div>
+          <div class="stat-unit"><div class="stat-title"><span>✧</span> 분노 <strong id="angerValue">0</strong></div><div class="stat-meter"><div id="angerBar"></div></div><small>변화를 향한 거친 불길</small></div>
+          <div class="rail-note" id="railNote">“영웅은 혼자 이름을 남기지 않는다.”</div>
+        </aside>
+      </section>
+      <div class="bottom-hint" id="bottomHint">선택에 정답은 없습니다. 그러나 모든 선택에는 결과가 남습니다.</div>
+    </main>
+
+    <footer class="site-footer"><span>고전 《홍길동전》에서 출발한 새로운 이야기</span><button id="resetButton" type="button">처음부터 다시 <span aria-hidden="true">↺</span></button></footer>
+  </div>
+
+  <audio id="bgmAudio" preload="auto" loop playsinline webkit-playsinline>
+    <source src="assets/ambient_yuldo_loop.wav" type="audio/wav">
+  </audio>
+
+  <div class="modal-backdrop" id="journalModal" hidden>
+    <section class="modal" role="dialog" aria-modal="true" aria-labelledby="journalHeading" tabindex="-1">
+      <div class="modal-header"><div><span class="eyebrow">SECRET ARCHIVE</span><h2 id="journalHeading">활빈당 단서첩</h2></div><button class="close-btn" id="closeJournal" type="button" aria-label="단서첩 닫기">×</button></div>
+      <p class="modal-intro">당신이 직접 발견한 기록입니다. 결말을 바꾸는 열쇠가 될 수 있습니다.</p>
+      <div id="journalItems" class="journal-items"></div>
+      <div class="journal-footer"><span>사라진 기록은, 누군가 기억할 때 다시 살아난다.</span></div>
+    </section>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+</body>
+</html>
