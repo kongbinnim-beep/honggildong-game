@@ -1,0 +1,461 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0c1222">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="홍길동전">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="description" content="홍길동전에서 영감을 받은 모바일 선택형 스토리 게임. 지워진 사람들의 이름을 되찾아라.">
+  <title>홍길동전: 지워진 이름들</title>
+  <style>
+
+:root{color-scheme:dark;--bg:#0b1220;--bg2:#111a2b;--surface:#152137;--ink:#f7eed9;--sub:#adb8c8;--soft:#7d8a9b;--gold:#e1b86b;--gold-bright:#f6d99b;--line:rgba(222,191,137,.22);--teal:#79c5b7;--rose:#e3a196;--radius:18px}
+*{box-sizing:border-box}html{min-height:100%;scroll-behavior:smooth}body{margin:0;background:radial-gradient(circle at 50% -20%,#233149 0%,transparent 48%),linear-gradient(135deg,#0c1526,#0a111e 70%);color:var(--ink);font-family:'DM Sans','Apple SD Gothic Neo','Malgun Gothic',sans-serif;min-height:100vh;min-height:100dvh}button,a{-webkit-tap-highlight-color:transparent}button{font:inherit;cursor:pointer}button:focus-visible,a:focus-visible{outline:2px solid var(--gold-bright);outline-offset:4px}::selection{background:rgba(225,184,107,.25)}.grain{position:fixed;inset:0;pointer-events:none;opacity:.12;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 150 150' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.68' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Cpath filter='url(%23n)' opacity='.22' d='M0 0h150v150H0z'/%3E%3C/svg%3E");z-index:10}.app-shell{max-width:1320px;margin:auto;padding:0 38px}.site-header{height:100px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line)}.brand{display:flex;align-items:center;gap:14px;color:var(--ink);text-decoration:none}.brand-mark{width:45px;height:45px;display:grid;place-items:center;border:1px solid #a87b4c;color:#f0be7c;font-family:serif;font-weight:700;font-size:27px;transform:rotate(-3deg)}.brand-type{display:flex;flex-direction:column;gap:3px}.brand-type b{font-family:'Noto Serif KR',serif;font-size:17px;letter-spacing:.09em}.brand-type small{font-size:9px;letter-spacing:.29em;color:var(--gold)}.header-actions{display:flex;align-items:center;gap:11px}.small-btn,.icon-btn{border:1px solid var(--line);background:rgba(255,255,255,.035);color:var(--ink);border-radius:8px;height:40px}.small-btn{padding:0 13px;display:flex;align-items:center;gap:9px;font-size:12px}.small-btn>span:first-child{font-size:20px;color:var(--gold)}.small-btn .count{color:var(--gold);border-left:1px solid var(--line);padding-left:8px}.icon-btn{width:40px;font-size:19px;color:var(--gold)}.icon-btn.muted{color:var(--soft)}.main-content{padding:29px 0 10px}.topline{max-width:850px;margin:auto}.topline-copy{display:flex;justify-content:space-between;color:var(--gold);font-size:11px;letter-spacing:.17em;font-weight:700;margin-bottom:12px}.topline-copy span:last-child{color:var(--soft);letter-spacing:.08em}.progress-track{height:2px;background:rgba(255,255,255,.12)}.progress-fill{background:linear-gradient(90deg,#b88848,#f1d59d);height:100%;width:0%;transition:width .55s ease}.game-grid{display:grid;grid-template-columns:minmax(48px,1fr) minmax(0,750px) minmax(180px,1fr);gap:36px;align-items:start;min-height:650px;padding-top:30px}.left-rail{display:flex;align-items:center;flex-direction:column;gap:18px;color:#8f805f;opacity:.65;font-size:10px;letter-spacing:.28em;padding-top:66px}.left-rail span:first-child{writing-mode:vertical-rl}.left-rail div{width:1px;height:120px;background:linear-gradient(var(--line),transparent)}.left-rail span:last-child{font-size:25px;font-family:serif}.story-panel{border:1px solid rgba(225,184,107,.28);border-radius:4px 4px 22px 22px;background:linear-gradient(165deg,rgba(34,46,66,.67),rgba(15,25,42,.9) 55%);box-shadow:0 18px 70px rgba(0,0,0,.19),inset 0 0 0 6px rgba(1,8,20,.15);min-height:620px;overflow:hidden;position:relative}.story-panel:before{content:'';position:absolute;inset:10px;border:1px solid rgba(225,184,107,.11);pointer-events:none;border-radius:1px 1px 14px 14px}.game-view-enter{animation:appear .35s ease both}@keyframes appear{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:translateY(0)}}.scene-art{height:204px;position:relative;overflow:hidden;display:grid;place-items:center;border-bottom:1px solid var(--line);background:radial-gradient(ellipse at 50% 80%,rgba(215,160,88,.22),transparent 65%),linear-gradient(160deg,#283a50,#142238 60%,#0f1b2c)}.scene-art:after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,transparent 55%,rgba(12,19,32,.45))}.scene-art .moon{position:absolute;width:137px;height:137px;border-radius:50%;background:#e6d1a0;box-shadow:0 0 0 18px rgba(235,207,151,.025),0 0 95px rgba(239,204,141,.22);top:21px;right:25%;opacity:.8}.scene-art .mountain{position:absolute;bottom:-80px;width:450px;height:180px;transform:rotate(22deg);background:#142135;border-radius:30px;left:-70px;box-shadow:210px -30px 0 #18273c,420px -35px 0 #152239}.scene-art .roof{position:absolute;bottom:-24px;left:36%;width:340px;height:100px;background:#0a1527;transform:rotate(-6deg);clip-path:polygon(0 35%,45% 0,90% 25%,100% 38%,50% 24%,15% 53%,0 53%)}.art-symbol{font-family:'Noto Serif KR',serif;font-size:76px;color:rgba(255,221,170,.87);z-index:1;text-shadow:0 6px 30px #0b1526;letter-spacing:.03em}.art-stamp{position:absolute;right:27px;bottom:24px;z-index:1;border:1px solid #b98766;color:#e8b68e;font-family:serif;padding:3px 5px;font-size:10px;transform:rotate(8deg);opacity:.85}.art-small{position:absolute;top:23px;left:30px;z-index:1;font-size:10px;letter-spacing:.28em;color:rgba(255,237,203,.7)}.art-market{background:radial-gradient(ellipse at 30% 90%,rgba(200,126,73,.24),transparent 58%),linear-gradient(160deg,#37465a,#172739)}.art-archive{background:radial-gradient(ellipse at 55% 100%,rgba(122,171,157,.2),transparent 65%),linear-gradient(160deg,#243a46,#11232c)}.art-court{background:radial-gradient(ellipse at 65% 70%,rgba(207,115,95,.2),transparent 65%),linear-gradient(160deg,#393746,#191d30)}.art-ending{background:radial-gradient(ellipse at 55% 70%,rgba(210,177,110,.27),transparent 65%),linear-gradient(160deg,#343f4f,#172435)}.scene-body{padding:33px 42px 35px}.eyebrow{font-size:10px;letter-spacing:.23em;text-transform:uppercase;color:var(--gold);font-weight:700}.scene-kicker{display:flex;align-items:center;gap:12px;margin-bottom:14px}.scene-kicker:after{content:'';height:1px;flex:1;background:var(--line)}h1,h2,h3,p{margin-top:0}.scene-title{font-family:'Noto Serif KR',serif;font-size:clamp(24px,3.6vw,33px);font-weight:700;letter-spacing:-.065em;line-height:1.5;margin-bottom:20px;word-break:keep-all}.scene-prose{font-family:'Noto Serif KR',serif;color:#dededc;font-size:14px;line-height:2.05;letter-spacing:-.02em;word-break:keep-all}.scene-prose p{margin:0 0 13px}.scene-prose strong{color:var(--gold-bright);font-weight:700}.dialogue{padding:13px 17px;border-left:2px solid var(--gold);background:rgba(234,187,111,.06);color:#f2e1bf;margin:17px 0 19px;font-family:'Noto Serif KR',serif;font-size:14px;line-height:1.85;word-break:keep-all}.chapter-question{display:flex;align-items:center;gap:10px;color:var(--gold);margin:30px 0 14px;font-size:12px;font-weight:700;letter-spacing:.01em}.chapter-question:before{content:'◆';font-size:8px}.choices{display:grid;gap:10px}.choice-btn{display:flex;gap:14px;width:100%;border:1px solid rgba(221,198,158,.2);border-radius:10px;background:rgba(255,255,255,.025);color:var(--ink);text-align:left;padding:15px 17px;align-items:center;transition:background .2s,border-color .2s,transform .2s}.choice-btn:not(:disabled):hover{background:rgba(225,184,107,.09);border-color:rgba(225,184,107,.55);transform:translateY(-1px)}.choice-index{width:25px;height:25px;border:1px solid rgba(225,184,107,.36);border-radius:50%;flex-shrink:0;display:grid;place-items:center;color:var(--gold);font-size:11px}.choice-copy{display:flex;flex-direction:column;gap:3px;flex:1}.choice-copy strong{font-size:13px;line-height:1.6;font-weight:600;word-break:keep-all}.choice-copy small{font-size:11px;line-height:1.5;color:var(--soft);word-break:keep-all}.choice-arrow{color:var(--gold);font-size:19px;opacity:.65}.choice-btn:disabled{opacity:.47;cursor:not-allowed}.choice-btn:disabled .choice-arrow{display:none}.tag-row{display:flex;gap:7px;flex-wrap:wrap;margin:17px 0 0}.tag{font-size:10px;color:#d5c39d;background:rgba(225,184,107,.075);border:1px solid rgba(225,184,107,.18);border-radius:99px;padding:6px 9px}.right-rail{padding-top:57px}.stat-caption{font-size:10px;letter-spacing:.12em;color:var(--gold);margin-bottom:32px;word-break:keep-all}.stat-unit{margin:0 0 29px}.stat-title{display:flex;gap:9px;align-items:center;font-size:12px;color:var(--ink);margin-bottom:9px}.stat-title span{color:var(--gold);font-size:15px}.stat-title strong{margin-left:auto;font-variant-numeric:tabular-nums;font-weight:500;color:var(--gold)}.stat-meter{height:4px;background:rgba(255,255,255,.1);border-radius:4px;overflow:hidden}.stat-meter>div{width:0;height:100%;background:#e4b976;transition:width .4s ease}.stat-unit:nth-of-type(3) .stat-meter>div{background:var(--teal)}.stat-unit:nth-of-type(4) .stat-meter>div{background:var(--rose)}.stat-unit small{display:block;font-size:10px;color:var(--soft);margin-top:8px}.rail-note{font-family:'Noto Serif KR',serif;font-size:12px;line-height:2;color:#90856f;border-top:1px solid var(--line);padding-top:24px;margin-top:13px;word-break:keep-all}.bottom-hint{text-align:center;color:#7e8998;font-size:11px;margin-top:24px;padding:0 10px;line-height:1.6}.site-footer{border-top:1px solid var(--line);margin-top:30px;padding:23px 0 30px;display:flex;justify-content:space-between;align-items:center;color:var(--soft);font-size:11px;gap:20px}.site-footer button{border:0;background:transparent;color:var(--gold);padding:9px 0;font-size:11px}.site-footer button:hover{text-decoration:underline}.intro-copy{text-align:center}.intro-copy .scene-title{font-size:clamp(30px,4.2vw,42px);line-height:1.42;margin-bottom:14px}.intro-quote{margin:5px 0 23px;color:var(--gold);font-family:'Noto Serif KR',serif;font-size:15px;line-height:2}.intro-meta{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:24px;margin-bottom:27px}.intro-meta span{border:1px solid var(--line);border-radius:99px;padding:8px 11px;color:var(--sub);font-size:11px}.primary-btn{border:1px solid #e8c184;background:#dbb778;color:#162135;border-radius:8px;min-height:50px;padding:13px 25px;font-size:14px;font-weight:700;cursor:pointer;transition:.2s}.primary-btn:hover{background:#f0d59f;transform:translateY(-1px)}.intro-actions{display:flex;justify-content:center;gap:10px;flex-wrap:wrap}.secondary-btn{border:1px solid var(--line);background:transparent;color:var(--gold-bright);padding:13px 17px;border-radius:8px;font-size:12px}.save-note{margin-top:18px;color:var(--soft);font-size:11px}.ending-mark{text-align:center;font-family:'Noto Serif KR',serif;color:var(--gold);letter-spacing:.26em;font-size:12px;margin-bottom:16px}.ending-title{text-align:center}.ending-subtitle{text-align:center;font-family:'Noto Serif KR',serif;font-size:14px;line-height:1.9;color:var(--gold-bright);margin:0 0 20px}.ending-result{border-top:1px solid var(--line);padding-top:21px;margin-top:20px}.ending-result h3{font-size:12px;color:var(--gold);margin-bottom:10px}.ending-result p{color:var(--sub);font-size:12px;line-height:1.9;word-break:keep-all}.ending-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:21px}.ending-actions button{flex:1}.reflection{border:1px solid var(--line);padding:14px 18px;margin-top:24px;border-radius:10px;background:rgba(225,184,107,.04);color:#d1c4a6;font-family:'Noto Serif KR',serif;font-size:12px;line-height:1.9}.modal-backdrop{position:fixed;inset:0;background:rgba(4,9,18,.82);z-index:50;display:grid;place-items:center;padding:18px;backdrop-filter:blur(9px)}.modal-backdrop[hidden]{display:none}.modal{width:min(100%,540px);max-height:min(82vh,700px);overflow-y:auto;background:#162238;border:1px solid var(--line);border-radius:16px;padding:28px;box-shadow:0 25px 90px rgba(0,0,0,.5)}.modal-header{display:flex;align-items:flex-start;justify-content:space-between}.modal-header h2{margin:6px 0 10px;font-family:'Noto Serif KR',serif;font-size:25px}.close-btn{font-size:27px;color:var(--gold);border:0;background:none}.modal-intro{color:var(--sub);font-size:12px;line-height:1.8;border-bottom:1px solid var(--line);padding-bottom:20px}.journal-items{display:grid;gap:10px;margin-top:19px}.journal-entry{padding:15px;border:1px solid var(--line);border-radius:9px;background:rgba(255,255,255,.02)}.journal-entry .item-number{font-size:10px;letter-spacing:.1em;color:var(--gold)}.journal-entry h3{font-family:'Noto Serif KR',serif;font-size:15px;margin:7px 0}.journal-entry p{color:var(--sub);line-height:1.8;font-size:12px;margin:0}.empty-journal{padding:30px 10px;text-align:center;color:var(--soft);line-height:2;font-size:12px}.journal-footer{border-top:1px solid var(--line);padding-top:16px;margin-top:25px;font-family:'Noto Serif KR',serif;color:var(--soft);font-size:11px;text-align:center}.toast{position:fixed;z-index:80;left:50%;bottom:25px;max-width:calc(100vw - 32px);padding:12px 20px;color:#1b2938;background:#e8c78f;box-shadow:0 10px 40px rgba(0,0,0,.26);border-radius:8px;font-size:12px;font-weight:600;text-align:center;transform:translate(-50%,20px);opacity:0;pointer-events:none;transition:.25s}.toast.show{opacity:1;transform:translate(-50%,0)}
+@media(max-width:1050px){.app-shell{padding:0 26px}.game-grid{grid-template-columns:40px minmax(0,1fr) 155px;gap:23px}.scene-body{padding:30px 32px}.stat-caption{line-height:1.7}}
+@media(max-width:760px){.app-shell{padding:0 16px}.site-header{height:73px}.brand-mark{width:38px;height:38px;font-size:23px}.brand-type b{font-size:14px}.brand-type small{font-size:8px}.header-actions{gap:7px}.small-btn{padding:0 9px;gap:5px;font-size:11px;height:37px}.icon-btn{height:37px;width:37px}.main-content{padding-top:23px}.game-grid{display:block;min-height:0;padding-top:19px}.left-rail{display:none}.right-rail{padding:18px 12px 4px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:13px}.stat-caption,.rail-note{display:none}.stat-unit{margin:0}.stat-title{font-size:11px;gap:3px}.stat-title span{font-size:12px}.stat-unit small{font-size:9px;line-height:1.5}.story-panel{min-height:0}.scene-art{height:170px}.scene-art .moon{width:115px;height:115px}.art-symbol{font-size:66px}.scene-body{padding:28px 24px 30px}.scene-title{font-size:26px}.scene-prose,.dialogue{font-size:13px}.chapter-question{margin-top:25px}.bottom-hint{margin-top:21px}.site-footer{margin-top:15px;align-items:flex-start;font-size:10px}.topline-copy{font-size:10px}}
+@media(max-width:380px){.app-shell{padding:0 11px}.brand{gap:8px}.brand-type small{letter-spacing:.16em}.scene-body{padding:25px 18px}.scene-title{font-size:23px}.small-btn>span:nth-child(2){display:none}.small-btn{gap:8px}.choice-btn{padding:13px 12px;gap:10px}.choice-copy strong{font-size:12px}.choice-copy small{font-size:10px}.site-footer{gap:12px}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
+
+/* 선택에 따른 MBTI형 신분 결과 카드 */
+.identity-card{position:relative;text-align:center;margin:0 0 34px;padding:27px 22px 22px;border:1px solid rgba(245,204,135,.65);border-radius:17px;background:radial-gradient(ellipse at 50% 5%,rgba(234,183,96,.22),transparent 58%),linear-gradient(145deg,#253349,#111e30);box-shadow:0 14px 42px rgba(0,0,0,.28),inset 0 0 0 5px rgba(5,12,22,.14);overflow:hidden}
+.identity-card:after{content:'義';position:absolute;right:-15px;bottom:-45px;font-family:serif;font-size:170px;color:rgba(226,184,107,.045);pointer-events:none}
+.identity-top{display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:9px;font-weight:700;letter-spacing:.1em;color:#e2bf84}
+.identity-symbol{font-size:42px;line-height:1.3;margin:20px auto 7px;color:#f2cb8c}
+.identity-prefix{font-family:'Noto Serif KR',serif;color:#e9d4ac;font-size:15px;margin:7px 0}
+.identity-role{font-family:'Noto Serif KR',serif;color:#ffe6ab;font-size:clamp(26px,5vw,38px);line-height:1.55;margin:0;font-weight:900;word-break:keep-all;text-shadow:0 4px 22px rgba(248,196,109,.16)}
+.identity-role span{display:block;font-size:.68em;color:#f5eee0}
+.identity-title{font-family:'Noto Serif KR',serif;font-size:16px;color:#f2d3a2;margin:14px 0 12px}
+.identity-summary{max-width:480px;margin:0 auto 18px;color:#e5e8ee;font-size:13px;line-height:1.9;word-break:keep-all}
+.identity-traits{display:flex;justify-content:center;gap:7px;flex-wrap:wrap;margin-bottom:20px}
+.identity-trait{padding:7px 9px;border:1px solid rgba(238,204,154,.27);border-radius:999px;font-size:11px;color:#f5dcaa;background:rgba(235,186,114,.07)}
+.identity-caution{border-top:1px solid rgba(238,204,154,.22);padding-top:16px;text-align:left;font-size:12px;line-height:1.8;color:#d6dce6}
+.identity-caution b{display:block;color:#e8c68e;margin-bottom:4px}
+.identity-caution p{margin:0;word-break:keep-all}
+.identity-foot{font-size:10px;line-height:1.7;color:#99a5b6;margin:15px 0 0}
+@media(max-width:760px){.identity-card{padding:22px 16px}.identity-top{font-size:8px;letter-spacing:0}.identity-role{font-size:29px}.identity-title{font-size:14px}}
+
+
+/* 휴대폰·아이패드 공통 개선 */
+html, body { width:100%; overflow-x:clip; -webkit-text-size-adjust:100%; }
+.app-shell { padding-left:max(18px, env(safe-area-inset-left)); padding-right:max(18px, env(safe-area-inset-right)); }
+.site-footer { padding-bottom:max(30px, env(safe-area-inset-bottom)); }
+button { touch-action:manipulation; }
+.choice-btn { min-height:58px; }
+.small-btn, .icon-btn, .close-btn { min-width:44px; min-height:44px; }
+.modal { overscroll-behavior:contain; }
+
+/* iPad 세로 및 작은 태블릿: 스토리 가운데, 상태 수치는 아래 */
+@media (min-width:761px) and (max-width:1024px) {
+  .app-shell { padding-left:30px; padding-right:30px; }
+  .game-grid { grid-template-columns:minmax(0,1fr); max-width:750px; margin:auto; gap:0; }
+  .left-rail { display:none; }
+  .right-rail { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:20px; padding:22px 20px 0; }
+  .right-rail .stat-caption, .right-rail .rail-note { display:none; }
+  .stat-unit { margin:0; }
+  .story-panel { min-height:0; }
+}
+/* 작은 휴대폰에서 결과·선택 버튼 가로 넘침 방지 */
+@media (max-width:760px) {
+  .app-shell { padding-left:max(12px, env(safe-area-inset-left)); padding-right:max(12px, env(safe-area-inset-right)); }
+  .scene-body { overflow-wrap:anywhere; }
+  .right-rail { gap:8px; }
+  .stat-title { flex-wrap:wrap; }
+  .choice-btn { min-height:58px; }
+  .ending-actions button { min-width:0; }
+  .identity-card { max-width:100%; }
+  .site-footer { flex-wrap:wrap; }
+}
+@media (max-width:420px) {
+  .ending-actions { flex-direction:column; }
+  .ending-actions button { width:100%; }
+  .identity-top { flex-wrap:wrap; justify-content:center; }
+  .right-rail .stat-unit small { display:none; }
+}
+@media (hover:none) {
+  .choice-btn:hover, .primary-btn:hover { transform:none; }
+}
+
+</style>
+
+</head>
+<body>
+  <div class="grain" aria-hidden="true"></div>
+  <div class="app-shell">
+    <header class="site-header">
+      <a class="brand" href="#" id="homeLink" aria-label="게임 첫 화면으로">
+        <span class="brand-mark" aria-hidden="true">洪</span>
+        <span class="brand-type"><b>홍길동전</b><small>THE ERASED NAMES</small></span>
+      </a>
+      <div class="header-actions">
+        <button class="small-btn" id="journalButton" type="button" aria-haspopup="dialog" aria-label="단서첩 열기"><span aria-hidden="true">▤</span><span>단서첩</span><span class="count" id="clueCount">0</span></button>
+        <button class="icon-btn" id="soundButton" type="button" aria-label="효과음 끄기" title="효과음">♪</button>
+      </div>
+    </header>
+
+    <main class="main-content">
+      <section class="topline" aria-label="진행 상태">
+        <div class="topline-copy"><span id="chapterEyebrow">서막 · 선택의 시작</span><span id="chapterNumber">00 / 06</span></div>
+        <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+      </section>
+
+      <section class="game-grid">
+        <aside class="left-rail" aria-hidden="true"><span>HONG · GIL · DONG</span><div></div><span>義</span></aside>
+        <article class="story-panel" id="storyPanel" aria-live="polite" aria-atomic="true">
+          <div id="gameView">
+            <div class="scene-body intro-copy" style="padding-top:45px;padding-bottom:45px">
+              <span class="eyebrow">INTERACTIVE STORY</span>
+              <h1 class="scene-title" style="margin-top:16px">홍길동전:<br>지워진 이름들</h1>
+              <p class="intro-quote">선택으로 당신의 신분이 결정되는 이야기</p>
+              <p class="scene-prose">홍길동이 되어 권력과 차별에 맞서세요.<br>마지막에는 당신만의 신분 결과가 나옵니다.</p>
+              <div class="intro-actions"><button id="initialStart" class="primary-btn" type="button" data-action="start">게임 시작하기 →</button></div>
+              <p class="save-note" id="browserHint">버튼을 눌러 게임을 시작하세요.</p>
+            </div>
+          </div>
+        </article>
+        <aside class="right-rail" aria-label="현재 상태">
+          <div class="stat-caption">당신이 바꾸고 있는 것</div>
+          <div class="stat-unit"><div class="stat-title"><span>◈</span> 증거 <strong id="evidenceValue">0</strong></div><div class="stat-meter"><div id="evidenceBar"></div></div><small>부패를 입증할 기록</small></div>
+          <div class="stat-unit"><div class="stat-title"><span>✦</span> 연대 <strong id="solidarityValue">0</strong></div><div class="stat-meter"><div id="solidarityBar"></div></div><small>서로를 지키려는 마음</small></div>
+          <div class="stat-unit"><div class="stat-title"><span>✧</span> 분노 <strong id="angerValue">0</strong></div><div class="stat-meter"><div id="angerBar"></div></div><small>변화를 향한 거친 불길</small></div>
+          <div class="rail-note" id="railNote">“영웅은 혼자 이름을 남기지 않는다.”</div>
+        </aside>
+      </section>
+      <div class="bottom-hint" id="bottomHint">선택에 정답은 없습니다. 그러나 모든 선택에는 결과가 남습니다.</div>
+    </main>
+
+    <footer class="site-footer"><span>고전 《홍길동전》에서 출발한 새로운 이야기</span><button id="resetButton" type="button">처음부터 다시 <span aria-hidden="true">↺</span></button></footer>
+  </div>
+
+  <div class="modal-backdrop" id="journalModal" hidden>
+    <section class="modal" role="dialog" aria-modal="true" aria-labelledby="journalHeading" tabindex="-1">
+      <div class="modal-header"><div><span class="eyebrow">SECRET ARCHIVE</span><h2 id="journalHeading">활빈당 단서첩</h2></div><button class="close-btn" id="closeJournal" type="button" aria-label="단서첩 닫기">×</button></div>
+      <p class="modal-intro">당신이 직접 발견한 기록입니다. 결말을 바꾸는 열쇠가 될 수 있습니다.</p>
+      <div id="journalItems" class="journal-items"></div>
+      <div class="journal-footer"><span>사라진 기록은, 누군가 기억할 때 다시 살아난다.</span></div>
+    </section>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script>
+/* 홍길동전: 지워진 이름들 — QR 접속용 모바일 스토리 게임
+   라이브러리·서버 없이 실행되는 순수 JavaScript입니다.
+   이야기를 수정하려면 SCENES, ENDINGS, ITEMS를 편집하세요. */
+(() => {
+  'use strict';
+
+  const STORAGE_KEY = 'honggildong-erased-names-v1';
+  const MAX_SCORE = 8;
+  const ITEMS = {
+    ration: { name: '빈 배급표', desc: '쌀을 받을 자격이 있다는 인장이 있지만, 주인의 이름만 칼로 도려낸 종이. 누군가 사람을 기록에서 지우고 있다.' },
+    token: { name: '위조된 출입패', desc: '관아의 문지기만 가진다는 패. 뒷면에는 부호의 가문 문장이 찍혀 있다.' },
+    letter: { name: '찢어진 편지', desc: '“호적에서 이름을 없애면 곡식도 함께 사라진다.” 수령의 심복이 남긴 명령 일부.' },
+    witness: { name: '서리의 증언', desc: '낮은 신분이라는 이유로 거짓 장부를 쓰도록 협박받은 서리의 진술. 그의 용기에는 보호가 필요하다.' },
+    ledger: { name: '비밀 곡물 장부', desc: '백성에게 지급할 곡식이 권세가의 창고로 옮겨진 날짜와 수량이 적혀 있다.' },
+    seal: { name: '수령의 붉은 인장', desc: '불법 명령서의 진위를 밝힐 수 있는 관인. 겉으론 나라의 권위, 실은 누군가의 탐욕을 나타낸다.' },
+    names: { name: '사라진 이름 목록', desc: '가난하다는 이유로 호적에서 지워진 백성 37명의 이름. 이 숫자 뒤에는 한 사람씩의 삶이 있다.' },
+    testimony: { name: '마을 사람들의 연서', desc: '서로 다른 신분의 사람들이 한 장의 종이에 자신의 이름을 적었다. 거짓보다 큰 힘을 가진 진실의 증거.' },
+  };
+
+  const defaultState = () => ({ scene: 'intro', evidence: 0, solidarity: 0, anger: 0, items: [], flags: [], history: [], played: false });
+  let state;
+  let homePreview = false;
+  let soundOn = false;
+  let audioContext = null;
+  let toastTimer = null;
+
+  const $ = id => document.getElementById(id);
+  const view = $('gameView');
+  const clamp = value => Math.max(0, Math.min(MAX_SCORE, value));
+  const has = id => state.items.includes(id);
+  const flag = id => state.flags.includes(id);
+
+  function load() {
+    try {
+      const data = JSON.parse(localStorage.getItem(STORAGE_KEY));
+      if (data && typeof data.scene === 'string' && Array.isArray(data.items) && Array.isArray(data.flags) && Array.isArray(data.history)
+          && ['intro', 'gate', 'market_help', 'market_chase', 'hideout', 'archive', 'jail', 'assembly', 'palace', 'bridge', 'finale', ...Object.keys(ENDINGS)].includes(data.scene)) {
+        return { ...defaultState(), ...data, evidence: clamp(Number(data.evidence) || 0), solidarity: clamp(Number(data.solidarity) || 0), anger: clamp(Number(data.anger) || 0) };
+      }
+    } catch (_) { /* 프라이빗 브라우징 등 저장이 불가능한 경우에도 플레이 가능 */ }
+    return defaultState();
+  }
+  function save() { try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch (_) {} }
+
+  const SCENES = {
+    gate: {
+      chapter: 1, section: '첫 번째 밤 · 성문 앞', art: '門', theme: 'market', title: '이름을 잃은 아이',
+      prose: () => `<p>달이 뜨자 도성의 성문이 닫힌다. 소년 하나가 배급소 앞에서 끌려 나온다. 종이에 분명 이름이 적혀 있었지만, 관리는 먹으로 덮어버렸다.</p><p>“<strong>호적에 이름이 없으면, 이 나라의 백성도 아니다.</strong>”</p><p>그 순간 한 관리가 검은 보자기를 품에 안고 골목으로 달아난다. 사람을 먼저 구할 것인가, 단서를 먼저 쫓을 것인가.</p>`,
+      dialogue: '“형님, 내 이름은 어디로 간 걸까요?”',
+      question: '홍길동, 첫 발걸음을 정하라.',
+      choices: [
+        { title: '아이를 일으켜 세운다', sub: '지금 여기서 지워진 사람을 외면하지 않는다', next: 'market_help', effects: { solidarity: 2 }, item: 'ration', flag: 'helped_child' },
+        { title: '검은 보자기를 든 관리를 쫓는다', sub: '이 일을 꾸민 자의 흔적부터 찾는다', next: 'market_chase', effects: { evidence: 1 }, item: 'token', flag: 'chased_clerk' }
+      ]
+    },
+    market_help: {
+      chapter: 2, section: '두 번째 장 · 저잣거리', art: '人', theme: 'market', title: '한 사람의 이름',
+      prose: () => `<p>아이의 이름은 ‘연’이다. 어머니가 병들자 연은 곡식을 받으러 왔다. 하지만 관리는 그 가족이 호적에서 사라졌다고 했다.</p><p>주변 사람들은 고개를 돌린다. 자신도 다음 차례가 될 수 있다는 걸 알기 때문이다.</p><p>연이 떨리는 손으로 낡은 종이 한 장을 건넨다. 그곳에는 <strong>관리의 붉은 인장 아래 도려낸 이름</strong>이 남아 있다.</p>`,
+      dialogue: '“저 하나를 도와주셔도, 내일은 다른 사람이 지워질 거예요.”',
+      question: '사람들 앞에서 무엇을 할까?',
+      choices: [
+        { title: '주변 상인들에게 함께 증언해 달라고 청한다', sub: '두려움을 나눌 사람을 모은다', next: 'hideout', effects: { solidarity: 1 }, flag: 'market_witnesses' },
+        { title: '연의 종이를 들고 관아의 명령을 추궁한다', sub: '눈앞의 부당함을 공개적으로 고발한다', next: 'hideout', effects: { evidence: 1, anger: 1 }, item: 'letter', flag: 'public_protest' }
+      ]
+    },
+    market_chase: {
+      chapter: 2, section: '두 번째 장 · 뒷골목', art: '影', theme: 'market', title: '침묵의 값',
+      prose: () => `<p>보자기 속에는 관아 문서와 비밀 출입패가 있었다. 관리는 길동에게 들키자 담벼락에 주저앉는다.</p><p>그는 수령의 명령을 받아 가난한 집의 이름을 호적에서 지웠다고 털어놓는다. 이름이 지워진 수만큼 배급 곡식은 권세가에게 흘러간다.</p>`,
+      dialogue: '“저도 시키는 대로 하지 않으면 가족이 쫓겨납니다.”',
+      question: '겁먹은 관리에게 어떻게 답할까?',
+      choices: [
+        { title: '그의 가족을 지켜주겠다고 약속한다', sub: '침묵을 깨는 데 필요한 것은 보호다', next: 'hideout', effects: { solidarity: 2, evidence: 1 }, item: 'witness', flag: 'protected_clerk' },
+        { title: '명령서만 빼앗고 그를 보내준다', sub: '진상을 밝힐 기록을 먼저 확보한다', next: 'hideout', effects: { evidence: 2, anger: 1 }, item: 'letter', flag: 'took_order' }
+      ]
+    },
+    hideout: {
+      chapter: 3, section: '세 번째 장 · 활빈당 은신처', art: '義', theme: 'archive', title: '정의는 누구의 것인가',
+      prose: () => `<p>활빈당 동료들이 지도 위에 등불을 놓는다. 가난한 사람의 이름을 지우고 곡식을 빼돌리는 수령. 그러나 손에 든 기록만으로는 모든 진실을 입증하기 어렵다.</p><p>${flag('helped_child') ? '연의 얼굴이 자꾸 떠오른다. 한 사람의 굶주림은 장부 밖에서 시작되지 않았다.' : '도망친 관리의 눈빛이 자꾸 떠오른다. 악한 명령 아래에서도 누군가는 두려움에 떨고 있었다.'}</p><p>관아의 <strong>곡물 장부</strong>가 보관된 서고와 거짓 문서를 쓴 <strong>하급 서리</strong>가 갇힌 옥사. 둘 중 한 곳만 먼저 갈 수 있다.</p>`,
+      dialogue: '“기록을 구해야 할까요, 기록을 쓴 사람을 구해야 할까요?”',
+      question: '어디로 향할까?',
+      choices: [
+        { title: '서고로 잠입해 장부를 찾는다', sub: '권력의 거짓을 숫자와 기록으로 증명한다', next: 'archive', effects: { evidence: 1 }, flag: 'archive_route' },
+        { title: '옥사로 가서 서리의 증언을 듣는다', sub: '진실을 아는 사람을 먼저 지킨다', next: 'jail', effects: { solidarity: 1 }, flag: 'jail_route' }
+      ]
+    },
+    archive: {
+      chapter: 4, section: '네 번째 장 · 관아 서고', art: '錄', theme: 'archive', title: '숫자 속의 비명',
+      prose: () => `<p>촛불 아래 펼친 장부에는 낯선 숫자가 빼곡하다. 실제로 나눠준 곡식은 적고, 관리의 친척에게 옮겨간 곡식은 많다.</p><p>서고 문밖에서 발걸음 소리가 들린다. 장부를 가져갈 시간은 짧다. 곁에는 사람들의 이름을 지운 명부도 놓여 있다.</p>`,
+      dialogue: '“한 줄의 숫자가, 한 집의 겨울을 빼앗았다.”',
+      question: '무엇을 먼저 지킬까?',
+      choices: [
+        { title: '장부를 품에 숨겨 나온다', sub: '조작된 배급과 수령의 횡령을 입증한다', next: 'assembly', effects: { evidence: 2 }, item: 'ledger', flag: 'got_ledger' },
+        { title: '지워진 이름들을 옮겨 적는다', sub: '숫자보다 먼저 사람을 되찾는다', next: 'assembly', effects: { evidence: 1, solidarity: 2 }, item: 'names', flag: 'got_names' },
+        { title: '서고의 봉인을 부수고 문서를 마을에 뿌린다', sub: '진실을 감추지 못하게 만들되 혼란을 감수한다', next: 'assembly', effects: { evidence: 1, anger: 2 }, item: 'letter', flag: 'broke_seal' }
+      ]
+    },
+    jail: {
+      chapter: 4, section: '네 번째 장 · 관아 옥사', art: '聲', theme: 'archive', title: '증언할 용기',
+      prose: () => `<p>차가운 옥사에서 젊은 서리 ‘소담’을 만난다. 그는 양반의 명령에 따라 백성 37명의 이름을 호적에서 지웠다고 고백한다.</p><p>소담은 장부의 위치도 알고 있다. 하지만 문밖에는 감시병이 있다. 소담을 데리고 나가면 기록까지 모두 옮길 수는 없다.</p>`,
+      dialogue: '“제가 진실을 말하면, 저를 지켜주실 건가요?”',
+      question: '소담에게 어떤 선택을 권할까?',
+      choices: [
+        { title: '소담과 함께 탈출한다', sub: '살아 있는 증언자를 보호한다', next: 'assembly', effects: { solidarity: 2, evidence: 1 }, item: 'witness', flag: 'rescued_sodam' },
+        { title: '소담의 증언을 기록하고 장부 조각을 챙긴다', sub: '위험하지만 결정적인 증거를 남긴다', next: 'assembly', effects: { evidence: 2 }, item: 'ledger', flag: 'recorded_sodam' },
+        { title: '감시병을 위협해 감옥 문을 모두 연다', sub: '억압받은 사람들의 분노를 행동으로 옮긴다', next: 'assembly', effects: { solidarity: 1, anger: 2 }, item: 'names', flag: 'opened_jail' }
+      ]
+    },
+    assembly: {
+      chapter: 5, section: '다섯 번째 장 · 마을의 밤', art: '衆', theme: 'court', title: '혼자가 아닌 목소리',
+      prose: () => `<p>밤중에 마을 사람들을 모았다. 누군가는 신분이 낮아 발언할 수 없었고, 누군가는 권력자의 보복을 두려워했다.</p><p>길동은 지금까지 얻은 ${state.items.length}개의 단서를 펼쳐 놓는다. 하지만 문서가 저절로 정의가 되지는 않는다. 그 문서를 믿고 <strong>함께 서 줄 사람</strong>이 필요하다.</p>`,
+      dialogue: '“우리가 서로의 이름을 부르지 않으면, 저들은 또 우리를 지울 겁니다.”',
+      question: '마을 사람들과 무엇을 약속할까?',
+      choices: [
+        { title: '모두의 이름을 적은 연서를 만든다', sub: '신분이 달라도 같은 목소리로 증언한다', next: 'palace', effects: { solidarity: 2, evidence: 1 }, item: 'testimony', flag: 'made_petition' },
+        { title: '증거를 복사해 여러 마을에 숨긴다', sub: '진실이 한 사람과 함께 사라지지 않게 한다', next: 'palace', effects: { evidence: 2, solidarity: 1 }, flag: 'copied_evidence' },
+        { title: '횃불을 들고 관아로 행진한다', sub: '더는 침묵하지 않겠다고 선언한다', next: 'bridge', effects: { anger: 2, solidarity: 1 }, flag: 'torch_march' }
+      ]
+    },
+    palace: {
+      chapter: 6, section: '여섯 번째 장 · 수령의 잔치', art: '權', theme: 'court', title: '권력의 식탁',
+      prose: () => `<p>수령은 백성이 굶주린 밤에도 잔치를 연다. 흰 쌀밥과 비단 옷, 금으로 칠한 잔. 문밖의 사람들은 빈 그릇을 들고 기다린다.</p><p>수령이 길동을 알아보고 웃는다. “네가 아무리 이름을 불러도 나라의 법은 바뀌지 않는다.”</p><p>${state.evidence >= 4 ? '당신의 품에는 부정할 수 없는 기록들이 있다.' : '손에 쥔 진실은 아직 빈틈이 있지만, 거짓이라는 확신만은 분명하다.'}</p>`,
+      dialogue: '“법을 가진 자가 옳은 것인가, 사람을 지키는 법이 옳은 것인가?”',
+      question: '마지막 한 수를 준비하라.',
+      choices: [
+        { title: '수령의 인장을 빼앗고 명령서를 대조한다', sub: '부패의 결정적 연결 고리를 확보한다', next: 'finale', effects: { evidence: 2, anger: 1 }, item: 'seal', flag: 'seized_seal' },
+        { title: '잔치 문을 열고 백성들의 증언을 듣게 한다', sub: '권력이 감춘 얼굴들을 세상 앞에 세운다', next: 'finale', effects: { solidarity: 2, evidence: 1 }, flag: 'opened_hall' },
+        { title: '수령에게 물러날 마지막 기회를 준다', sub: '피를 흘리지 않고 책임을 묻는다', next: 'finale', effects: { evidence: 1, solidarity: 1 }, flag: 'offered_choice' }
+      ]
+    },
+    bridge: {
+      chapter: 6, section: '여섯 번째 장 · 돌다리 위', art: '火', theme: 'court', title: '불길의 방향',
+      prose: () => `<p>관아로 향하는 다리 위에서 백성들이 횃불을 들어 올린다. 누군가는 잃어버린 곡식을, 누군가는 사라진 가족의 이름을 외친다.</p><p>군사들이 창을 겨눈다. 첫 돌이 날아가면 밤은 다시 돌이킬 수 없을 것이다.</p>`,
+      dialogue: '“분노는 우리를 모았지만, 내일을 만들 수 있을까요?”',
+      question: '횃불 앞에서 무엇을 외칠까?',
+      choices: [
+        { title: '창 대신 증거를 높이 들라고 외친다', sub: '분노를 공개적인 고발로 바꾼다', next: 'finale', effects: { evidence: 2, solidarity: 1 }, flag: 'raised_documents' },
+        { title: '어린아이와 노인을 뒤로 보내고 행진한다', sub: '먼저 서로를 보호한다', next: 'finale', effects: { solidarity: 2, anger: 1 }, flag: 'protected_crowd' },
+        { title: '관아의 문을 무너뜨린다', sub: '오늘 밤, 강제로라도 억압을 끝낸다', next: 'finale', effects: { anger: 2 }, flag: 'stormed_gate' }
+      ]
+    },
+    finale: {
+      chapter: 7, section: '마지막 장 · 이름의 새벽', art: '名', theme: 'ending', title: '당신이 남길 이름',
+      prose: () => `<p>동이 트기 직전, 사람들의 시선이 길동에게 모인다.</p><p>증거는 <strong>${state.evidence}</strong>, 함께 서는 사람들의 힘은 <strong>${state.solidarity}</strong>, 분노의 불길은 <strong>${state.anger}</strong>.</p><p>어떤 길에는 충분한 준비가 필요하다. 지금까지 해 온 선택이 마지막 선택의 가능성을 바꾸었다. 그러나 <strong>무엇을 정의라고 부를지는 당신의 몫</strong>이다.</p>`,
+      dialogue: '“길동아. 네 이름이 아니라, 우리 이름을 남겨다오.”',
+      question: '당신은 어떤 결말을 선택할 것인가?',
+      choices: [
+        { title: '공개 재판을 열어 호적을 바로잡는다', sub: '증거 4 · 연대 4 이상 필요', next: 'reform', enabled: () => state.evidence >= 4 && state.solidarity >= 4, lock: '증거 4, 연대 4가 필요합니다.' },
+        { title: '백성들 스스로 새 명부를 만든다', sub: '연대 5 이상 필요', next: 'community', enabled: () => state.solidarity >= 5, lock: '연대 5가 필요합니다.' },
+        { title: '활빈당과 함께 관아를 무너뜨린다', sub: '분노 4 이상 필요', next: 'uprising', enabled: () => state.anger >= 4, lock: '분노 4가 필요합니다.' },
+        { title: '증거를 세상에 퍼뜨리고 수령을 고발한다', sub: '증거 3 이상 필요', next: 'exposure', enabled: () => state.evidence >= 3, lock: '증거 3이 필요합니다.' },
+        { title: '수령과 거래하여 당장의 굶주림을 멈춘다', sub: '언제든 선택 가능 · 대가가 따른다', next: 'bargain' }
+      ]
+    }
+  };
+
+  const ENDINGS = {
+    reform: { number: 'ENDING 01 / 05', name: '지워진 이름을 되찾은 새벽', art: '春', quote: '“나라의 주인은 기록을 지우는 자가 아니라, 서로의 이름을 지키는 사람이다.”',
+      text: `<p>길동은 백성들의 연서와 확보한 증거를 들고 공개 재판을 요구한다. 수령의 횡령이 드러나고, 호적에서 지워진 이름들이 하나씩 복구된다.</p><p>모든 차별이 하루 만에 사라지지는 않는다. 그러나 이제 누구도 신분만으로 증언을 빼앗기지 않도록 마을 사람들이 감시 모임을 세운다.</p><p><strong>영웅 한 사람의 승리보다 오래가는 것은, 함께 만든 제도와 약속이다.</strong></p>`, result: '제도를 바꾸는 일은 증거와 연대가 함께할 때 가능했다.', theme: '제도적 정의 · 연대 · 사회적 책임' },
+    community: { number: 'ENDING 02 / 05', name: '우리가 쓰는 호적', art: '同', quote: '“종이에 적히지 않았어도, 우리는 서로를 안다.”',
+      text: `<p>길동과 백성들은 관아의 허락을 기다리지 않는다. 마을의 빈 창고를 열어 식량을 나누고, 신분을 묻지 않는 새 명부를 만든다.</p><p>수령은 여전히 높은 자리에 있지만, 사람들이 서로의 존재를 증명하기 시작하자 그의 명령은 예전만큼 통하지 않는다.</p><p><strong>큰 권력이 움직이지 않을 때에도, 작은 공동체는 변화를 시작할 수 있다.</strong></p>`, result: '가장 튼튼한 기록은 서로를 기억하는 사람들이었다.', theme: '공동체 · 상호 돌봄 · 아래로부터의 변화' },
+    uprising: { number: 'ENDING 03 / 05', name: '불타는 관아, 남겨진 질문', art: '焰', quote: '“문은 무너졌다. 그러나 그다음 문을 누가 세울 것인가?”',
+      text: `<p>활빈당의 함성과 함께 관아의 문이 무너진다. 수령은 달아나고 곡식 창고가 열려 사람들은 처음으로 배불리 먹는다.</p><p>하지만 혼란 속에서 일부 기록도 사라진다. 분노가 가라앉자 백성들은 묻기 시작한다. 누가 다음 결정을 내릴 것인가. 권력은 다시 누구에게 모일 것인가.</p><p><strong>불의에 맞서는 용기는 필요하다. 그러나 정의를 지켜 낼 규칙은 또 다른 노력으로 만들어야 한다.</strong></p>`, result: '억압을 끝낸 힘이 새 억압이 되지 않도록 경계해야 했다.', theme: '저항 · 권력의 순환 · 책임' },
+    exposure: { number: 'ENDING 04 / 05', name: '성문 밖으로 퍼진 진실', art: '文', quote: '“한 장의 문서가 바람을 타고 여러 사람의 입이 되었다.”',
+      text: `<p>길동은 수령의 장부와 증언을 여러 고을에 퍼뜨린다. 관아는 문서를 거짓이라 주장하지만, 같은 일을 겪은 사람들이 곳곳에서 나타난다.</p><p>수령의 처벌은 아직 정해지지 않았다. 호적도 모두 복구되지는 못했다. 그래도 이제 진실은 한 사람의 손에서 빼앗아 없앨 수 없게 되었다.</p><p><strong>부패를 드러내는 일은 정의의 끝이 아니라, 정의를 요구할 출발점이다.</strong></p>`, result: '진실은 밝혀졌지만 그 이후를 바꿀 연대가 더 필요했다.', theme: '고발 · 언론과 기록 · 시민의 감시' },
+    bargain: { number: 'ENDING 05 / 05', name: '반쪽짜리 아침', art: '半', quote: '“오늘은 배불렀다. 그러나 내일의 이름은 누가 지킬까?”',
+      text: `<p>수령은 빼돌린 곡식의 일부를 돌려주고, 길동은 당장의 약속을 받아들인다. 굶주린 아이들은 밥을 먹는다. 사람들은 잠시 안도한다.</p><p>하지만 이름을 지운 명령과 차별의 규칙은 그대로다. 수령의 자리를 지키는 대가로 일부 진실이 봉인된다.</p><p><strong>눈앞의 고통을 줄이는 선택에도 의미는 있다. 다만 잘못된 구조를 남겨 두면 같은 고통은 되풀이될 수 있다.</strong></p>`, result: '당장의 구원과 오래가는 정의 사이의 어려운 선택이 남았다.', theme: '타협 · 구조적 문제 · 장기적 책임' }
+  };
+
+  // MBTI처럼 선택 결과를 요약하는 이야기 속 신분 유형 (실제 신분 판정이 아닙니다).
+  const IDENTITIES = {
+    reform: { code: 'JUSTICE', title: '새 시대를 여는 개혁가', role: '정의로운 시민', symbol: '⚖', summary: '당신은 눈앞의 승리보다 모두에게 적용되는 공정한 규칙을 택했습니다.', strengths: ['원칙을 지키는 용기', '증거로 설득하는 힘', '함께 바꾸는 리더십'], caution: '좋은 제도도 사람들이 계속 감시해야 지켜집니다.' },
+    community: { code: 'SOLIDARITY', title: '사람을 지키는 공동체의 수호자', role: '선량한 시민', symbol: '✦', summary: '당신은 높은 자리의 허락을 기다리기보다 곁에 있는 사람의 손을 잡았습니다.', strengths: ['따뜻한 연대', '실천하는 배려', '모두를 품는 태도'], caution: '서로를 돌보면서도 차별의 근본적인 규칙을 고치는 일을 잊지 마세요.' },
+    uprising: { code: 'RESISTANCE', title: '불의를 깨뜨리는 저항가', role: '용감한 의적', symbol: '🔥', summary: '당신은 부당한 권력 앞에서 물러서지 않고 변화를 위해 행동했습니다.', strengths: ['두려움 없는 용기', '빠른 결단', '불의에 맞서는 행동력'], caution: '무너뜨린 권력 자리에 또 다른 억압이 들어서지 않도록 살펴야 합니다.' },
+    exposure: { code: 'TRUTH', title: '침묵을 깨는 진실의 기록자', role: '깨어 있는 시민', symbol: '✎', summary: '당신은 지워진 목소리를 모아 누구도 숨길 수 없는 진실로 만들었습니다.', strengths: ['날카로운 관찰', '흔들리지 않는 양심', '진실을 전하는 힘'], caution: '진실을 알리는 일 다음에는 실제 변화를 만드는 연대가 필요합니다.' },
+    bargain: { code: 'COMPROMISE', title: '권력의 그늘에 머문 생존자', role: '권력에 얽매인 백성', symbol: '◈', summary: '당신은 당장의 굶주림을 해결했지만, 권력이 만든 신분의 벽을 허물지는 못했습니다.', strengths: ['현실을 읽는 눈', '위기를 넘기는 판단', '눈앞의 고통에 대한 공감'], caution: '살아남기 위한 타협은 이해할 수 있지만, 침묵이 길어지면 지배가 굳어질 수 있습니다.' }
+  };
+
+  state = load();
+
+  function safeStr(v) { return String(v).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+  function sceneArt(symbol, theme = '') {
+    return `<div class="scene-art art-${theme}" aria-hidden="true"><div class="moon"></div><div class="mountain"></div><div class="roof"></div><span class="art-small">THE ERASED NAMES · 01</span><span class="art-symbol">${symbol}</span><span class="art-stamp">活貧</span></div>`;
+  }
+  function renderIntro() {
+    const canResume = state.played && state.scene !== 'intro';
+    return `${sceneArt('洪', '')}<div class="scene-body intro-copy game-view-enter"><div class="scene-kicker"><span class="eyebrow">INTERACTIVE STORY · 조선의 또 다른 밤</span></div><h1 class="scene-title">홍길동전:<br>지워진 이름들</h1><div class="intro-quote">“아버지를 아버지라 부르지 못하던 시대,<br>이제는 백성이 자신의 이름마저 부르지 못한다.”</div><p class="scene-prose">신분과 권력 때문에 삶을 빼앗긴 사람들.<br>홍길동이 되어 진실을 찾고, 동료를 모으고,<br>당신의 선택으로 새로운 결말을 만드세요.</p><div class="intro-meta"><span>⏳ 약 5–8분</span><span>◆ 선택형 스토리</span><span>◇ 다섯 가지 신분 결과</span></div><div class="intro-actions"><button class="primary-btn" type="button" data-action="start">${canResume ? '새로운 이야기 시작하기' : '이야기 시작하기'} &nbsp; →</button>${canResume ? '<button class="secondary-btn" type="button" data-action="resume">이어서 플레이</button>' : ''}</div><p class="save-note">진행 상황은 이 기기에 자동 저장됩니다.</p></div>`;
+  }
+  function renderScene(scene) {
+    const buttons = scene.choices.map((choice, index) => {
+      const enabled = !choice.enabled || choice.enabled();
+      const subtitle = enabled ? choice.sub : choice.lock;
+      return `<button class="choice-btn" type="button" data-choice="${index}" ${enabled ? '' : 'disabled'}><span class="choice-index">${String(index + 1).padStart(2, '0')}</span><span class="choice-copy"><strong>${safeStr(choice.title)}</strong><small>${safeStr(subtitle || '')}</small></span><span class="choice-arrow" aria-hidden="true">↗</span></button>`;
+    }).join('');
+    const showStatus = state.scene === 'finale' ? `<div class="tag-row"><span class="tag">◈ 증거 ${state.evidence}</span><span class="tag">✦ 연대 ${state.solidarity}</span><span class="tag">✧ 분노 ${state.anger}</span></div>` : '';
+    return `${sceneArt(scene.art, scene.theme)}<div class="scene-body game-view-enter"><div class="scene-kicker"><span class="eyebrow">${scene.section}</span></div><h1 class="scene-title">${scene.title}</h1><div class="scene-prose">${scene.prose()}</div><div class="dialogue">${scene.dialogue}</div>${showStatus}<div class="chapter-question">${scene.question}</div><div class="choices">${buttons}</div></div>`;
+  }
+  function renderEnding(ending) {
+    const identity = IDENTITIES[state.scene];
+    const inventory = state.items.length ? state.items.map(id => ITEMS[id]?.name).filter(Boolean).join(' · ') : '기록하지 못한 단서들';
+    const turns = state.history.length;
+    const traits = identity.strengths.map(t => `<span class="identity-trait"># ${t}</span>`).join('');
+    return `${sceneArt(ending.art, 'ending')}<div class="scene-body game-view-enter">
+      <section class="identity-card" aria-label="나의 신분 유형 결과">
+        <div class="identity-top"><span>나의 신분 결과 · PERSONALITY RESULT</span><span>${ending.number}</span></div>
+        <div class="identity-symbol" aria-hidden="true">${identity.symbol}</div>
+        <p class="identity-prefix">당신의 신분은</p>
+        <h1 class="identity-role">${identity.role}<span>입니다.</span></h1>
+        <p class="identity-title">「${identity.title}」</p>
+        <p class="identity-summary">${identity.summary}</p>
+        <div class="identity-traits">${traits}</div>
+        <div class="identity-caution"><b>당신에게 남은 질문</b><p>${identity.caution}</p></div>
+        <p class="identity-foot">당신의 선택을 바탕으로 한 이야기 속 유형입니다. 현실의 신분이나 인격을 평가하지 않습니다.</p>
+      </section>
+      <div class="ending-mark">${ending.number}</div><h2 class="scene-title ending-title">${ending.name}</h2><p class="ending-subtitle">${ending.quote}</p><div class="scene-prose">${ending.text}</div><div class="ending-result"><h3>당신의 이야기 기록</h3><p>총 ${turns}번의 선택 · 발견한 단서 ${state.items.length}개<br>증거 ${state.evidence} / 연대 ${state.solidarity} / 분노 ${state.anger}<br>주요 단서: ${safeStr(inventory)}</p><p><strong>${ending.result}</strong></p></div><div class="reflection">생각해 보기 · 오늘날에도 누군가의 목소리가 신분, 돈, 권력 때문에 지워진다면 우리는 무엇을 할 수 있을까요?</div><div class="ending-actions"><button class="primary-btn" type="button" data-action="restart">다른 신분 만나보기 ↺</button><button class="secondary-btn" type="button" data-action="share">나의 신분 공유하기 ↗</button></div></div>`;
+  }
+
+  function render() {
+    const onIntro = state.scene === 'intro' || homePreview;
+    const ending = ENDINGS[state.scene];
+    const scene = SCENES[state.scene];
+    view.innerHTML = onIntro ? renderIntro() : ending ? renderEnding(ending) : scene ? renderScene(scene) : renderIntro();
+    const chapter = onIntro ? 0 : ending ? 7 : scene.chapter;
+    $('chapterEyebrow').textContent = onIntro ? '서막 · 선택의 시작' : ending ? '종장 · 당신이 만든 결말' : scene.section;
+    $('chapterNumber').textContent = `${String(chapter).padStart(2, '0')} / 07`;
+    $('progressFill').style.width = `${(chapter / 7) * 100}%`;
+    $('clueCount').textContent = state.items.length;
+    for (const [key, id, barId] of [['evidence','evidenceValue','evidenceBar'], ['solidarity','solidarityValue','solidarityBar'], ['anger','angerValue','angerBar']]) {
+      $(id).textContent = state[key];
+      $(barId).style.width = `${(state[key] / MAX_SCORE) * 100}%`;
+    }
+    $('bottomHint').textContent = ending ? '다른 선택으로 다시 플레이하면 또 다른 결말을 만날 수 있습니다.' : onIntro ? '하나의 QR, 여러 갈래의 이야기. 당신의 선택으로 진행됩니다.' : '선택은 되돌릴 수 없지만, 이야기는 언제든 다시 시작할 수 있습니다.';
+    $('railNote').textContent = ending ? '“당신은 어떤 세상을 남겼나요?”' : state.solidarity >= 4 ? '“함께 서는 사람이 늘어나면 역사가 움직인다.”' : state.anger >= 4 ? '“분노는 불씨가 되고, 선택은 불길의 방향이 된다.”' : '“영웅은 혼자 이름을 남기지 않는다.”';
+    if (onIntro) $('storyPanel').setAttribute('aria-label', '게임 시작 화면');
+    else $('storyPanel').setAttribute('aria-label', ending ? '게임 결말' : `게임 ${chapter}장`);
+  }
+  function start() { state = defaultState(); state.scene = 'gate'; state.played = true; homePreview = false; save(); playClick(); render(); scrollToTop(); }
+  function choose(index) {
+    const scene = SCENES[state.scene];
+    if (!scene || !Number.isInteger(index) || !scene.choices[index]) return;
+    const choice = scene.choices[index];
+    if (choice.enabled && !choice.enabled()) return;
+    for (const [stat, change] of Object.entries(choice.effects || {})) if (['evidence','solidarity','anger'].includes(stat)) state[stat] = clamp(state[stat] + change);
+    if (choice.item && !has(choice.item)) state.items.push(choice.item);
+    if (choice.flag && !flag(choice.flag)) state.flags.push(choice.flag);
+    state.history.push({ scene: state.scene, choice: choice.title });
+    state.scene = choice.next;
+    save(); playClick(); render(); scrollToTop();
+    if (choice.item) toast(`새 단서: ${ITEMS[choice.item].name}`);
+  }
+  function scrollToTop() { if (window.scrollY > 70) window.scrollTo({ top: 0, behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth' }); }
+  function restart() { if (confirm('지금까지의 선택을 지우고 처음부터 다시 시작할까요?')) start(); }
+  function toast(message) { const el = $('toast'); el.textContent = message; el.classList.add('show'); clearTimeout(toastTimer); toastTimer = setTimeout(() => el.classList.remove('show'), 2600); }
+
+  function openJournal() {
+    const entries = state.items.map((id, index) => {
+      const item = ITEMS[id];
+      if (!item) return '';
+      return `<article class="journal-entry"><span class="item-number">CLUE ${String(index + 1).padStart(2,'0')}</span><h3>${item.name}</h3><p>${item.desc}</p></article>`;
+    }).join('');
+    $('journalItems').innerHTML = entries || '<div class="empty-journal">아직 발견한 단서가 없습니다.<br>이야기 속 사람들과 기록을 살펴보세요.</div>';
+    $('journalModal').hidden = false;
+    $('closeJournal').focus();
+    document.body.style.overflow = 'hidden';
+  }
+  function closeJournal() { $('journalModal').hidden = true; document.body.style.overflow = ''; $('journalButton').focus(); }
+  function playClick() {
+    if (!soundOn) return;
+    try {
+      const AudioCtor = window.AudioContext || window.webkitAudioContext;
+      if (!AudioCtor) return;
+      audioContext ||= new AudioCtor();
+      if (audioContext.state === 'suspended') audioContext.resume();
+      const osc = audioContext.createOscillator();
+      const gain = audioContext.createGain();
+      osc.type = 'sine'; osc.frequency.setValueAtTime(470, audioContext.currentTime); osc.frequency.exponentialRampToValueAtTime(650, audioContext.currentTime + .07);
+      gain.gain.setValueAtTime(.045, audioContext.currentTime); gain.gain.exponentialRampToValueAtTime(.001, audioContext.currentTime + .12);
+      osc.connect(gain).connect(audioContext.destination); osc.start(); osc.stop(audioContext.currentTime + .13);
+    } catch (_) { /* 오디오를 지원하지 않는 브라우저 */ }
+  }
+  function toggleSound() {
+    soundOn = !soundOn;
+    $('soundButton').classList.toggle('muted', !soundOn);
+    $('soundButton').setAttribute('aria-label', soundOn ? '효과음 끄기' : '효과음 켜기');
+    $('soundButton').title = soundOn ? '효과음 켜짐' : '효과음 꺼짐';
+    if (soundOn) playClick();
+  }
+  async function shareEnding() {
+    const ending = ENDINGS[state.scene]; if (!ending) return;
+    const text = `《홍길동전: 지워진 이름들》\n당신의 신분은 ${IDENTITIES[state.scene].role}입니다!\n${IDENTITIES[state.scene].summary}\n나의 결말: ${ending.name}\n증거 ${state.evidence} · 연대 ${state.solidarity} · 분노 ${state.anger}\n${ending.result}${location.protocol.startsWith('http') ? '\n' + location.href : ''}`;
+    if (navigator.share) { try { await navigator.share({title: '홍길동전: 지워진 이름들', text}); return; } catch (e) { if (e.name === 'AbortError') return; } }
+    try { await navigator.clipboard.writeText(text); toast('결말이 복사되었습니다!'); }
+    catch (_) { const t = document.createElement('textarea'); t.value = text; t.style.position = 'fixed'; t.style.opacity = '0'; document.body.appendChild(t); t.select(); const ok = document.execCommand('copy'); t.remove(); toast(ok ? '결말이 복사되었습니다!' : '이 브라우저에서는 공유할 수 없습니다.'); }
+  }
+
+  view.addEventListener('click', event => {
+    const option = event.target.closest('[data-choice]');
+    if (option) { choose(Number(option.dataset.choice)); return; }
+    const action = event.target.closest('[data-action]')?.dataset.action;
+    if (action === 'start') { if (state.played && state.scene !== 'intro' && !confirm('저장된 진행 상황을 지우고 새로운 이야기를 시작할까요?')) return; start(); }
+    else if (action === 'resume') { homePreview = false; playClick(); render(); }
+    else if (action === 'restart') restart();
+    else if (action === 'share') shareEnding();
+  });
+  $('journalButton').addEventListener('click', openJournal);
+  $('closeJournal').addEventListener('click', closeJournal);
+  $('journalModal').addEventListener('click', e => { if (e.target === $('journalModal')) closeJournal(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape' && !$('journalModal').hidden) closeJournal(); });
+  $('resetButton').addEventListener('click', restart);
+  $('soundButton').addEventListener('click', toggleSound);
+  $('homeLink').addEventListener('click', e => { e.preventDefault(); homePreview = true; render(); scrollToTop(); });
+  $('soundButton').classList.add('muted');
+  $('soundButton').setAttribute('aria-label', '효과음 켜기');
+  $('soundButton').title = '효과음 꺼짐';
+  render();
+})();
+
+</script>
+</body>
+</html>
